@@ -10,11 +10,11 @@ const utils = require('./utils');
 const app = express();
 app.use("/css", express.static(utils.joinPathWithClient('/shared/css')));
 
-app.get('/', function (req, res) {
+app.get('/', (req, res) => {
     res.sendFile(utils.joinPathWithClient('index.html'));
 });
 
-app.get('/review-analyser', function (req, res) {
+app.get('/review-analyser', (req, res) => {
     res.sendFile(utils.joinPathWithClient('review-analyser.html'));
 });
 

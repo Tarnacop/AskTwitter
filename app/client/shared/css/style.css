@@ -13,7 +13,7 @@
 
 #contact-section {
   padding-top: 50px;
-  height: 500px;
+  height: 600px;
   color: white;
   background-color: #002D44;
 }
@@ -34,7 +34,7 @@
 }
 
 .navbar {
-  background-color: #565656;
+  background-color: black;
   color: #FEF2BD;
   font-size: 20px;
   padding-right: 45px;
@@ -45,7 +45,7 @@
 .navbar-inverse .navbar-nav > .active > a:hover,
 .navbar-inverse .navbar-nav > .active > a:focus {
   color: white !important;
-  background-color: #565656 !important;
+  background-color: black !important;
 }
 
 .home-container {
@@ -91,9 +91,9 @@
 .btn-default:hover {
   border-width: 2px;
   border-color: #002D44;
-  color: black;
+  color: white;
   font-size: 25px;
-  background-color: #A4A4A4;
+  background-color: black;
 }
 
 .form-container {
@@ -102,4 +102,8 @@
 
 .form-control {
   margin: 10px;
+}
+
+.btn-submit {
+  margin-top: 20px;
 }

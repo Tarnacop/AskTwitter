@@ -1,3 +1,105 @@
-.test {
-  color: red;
+#home-section {
+  padding-top: 50px;
+  height: 100vh;
+  color: white;
+}
+
+#about-section {
+  padding-top: 50px;
+  height: 500px;
+  color: #002D44;
+  background-color: white;
+}
+
+#contact-section {
+  padding-top: 50px;
+  height: 500px;
+  color: white;
+  background-color: #002D44;
+}
+
+#footer-section {
+  padding-top: 50px;
+  height: 300px;
+  color: white;
+  background-color: black;
+}
+
+.font1 {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.font2 {
+  font-family: 'Patua One', cursive;
+}
+
+.navbar {
+  background-color: #565656;
+  color: #FEF2BD;
+  font-size: 20px;
+  padding-right: 45px;
+  padding-left: 20px;
+}
+
+.navbar-inverse .navbar-nav > .active > a,
+.navbar-inverse .navbar-nav > .active > a:hover,
+.navbar-inverse .navbar-nav > .active > a:focus {
+  color: white !important;
+  background-color: #565656 !important;
+}
+
+.home-container {
+  margin-top: 8%;
+}
+
+.home-buttons {
+  margin-top: 60px;
+  text-align: center;
+}
+
+.banner {
+  font-size: 120px;
+}
+
+.title1 {
+  font-size: 50px;
+}
+
+.title2 {
+  font-size: 30px;
+}
+
+.description1 {
+  font-size: 35px;
+}
+
+.description2 {
+  font-size: 15px;
+  padding: 20px;
+}
+
+.btn-default {
+  width: 100%;
+  border-width: 2px;
+  border-color: #002D44;
+  background-color: white;
+  color: #002D44;
+  font-size: 25px;
+  transition: all 0.7s;
+}
+
+.btn-default:hover {
+  border-width: 2px;
+  border-color: #002D44;
+  color: black;
+  font-size: 25px;
+  background-color: #A4A4A4;
+}
+
+.form-container {
+  margin-top: 20px;
+}
+
+.form-control {
+  margin: 10px;
 }

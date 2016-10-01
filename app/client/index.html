@@ -2,19 +2,119 @@
 <html>
 
 <head>
-  <title>Trend ATAA</title>
+  <title>Review ATAA</title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Patua+One|Montserrat:700" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
+<body data-spy="scroll" data-target=".navbar" data-offset="50" class="font2">
 
-<div class="test">Hello World</div>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <a class="navbar-brand font1" href="#home-section">Review ATAA</a>
+  <ul class="nav navbar-nav navbar-right">
+    <li><a href="#home-section">Home</a></li>
+    <li><a href="#about-section">About</a></li>
+    <li><a href="#contact-section">Contact</a></li>
+  </ul>
+</nav>
+
+<div id="home-section" class="container-fluid" style="background-image: url(shared/images/home.jpg); background-size: cover;">
+  <div class="home-container">
+    <div class="container">
+      <h1 class="row text-center banner font1">Review ATAA</h1>
+      <h3 class="row text-center description1">
+        Suspendisse finibus, eros nec euismod ornare, mauris ex lacinia enim, congue placerat leo ante ut velit.
+      </h3>
+    </div>
+    <div class="home-buttons container">
+      <div class="row">
+        <div class="col-md-3 col-md-offset-3">
+          <a href="" class="btn btn-default">Explore pula</a>
+        </div>
+        <div class="col-md-3">
+          <a href="" class="btn btn-default">Find out more</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="about-section" class="container-fluid">
+  <div class="about-container container">
+    <h2 class="row text-center title1 font1">About</h2>
+    <div class="row about-content">
+      <div class="col-md-4">
+        <h3 class="row text-center title2 font1">Title 1</h3>
+        <div class="row text-justify description2">
+          Nam sapien tellus, pretium venenatis arcu nec, varius interdum tellus. Donec tristique placerat mauris, quis auctor massa pretium nec. Nullam semper vehicula vestibulum. Quisque quis neque sodales, auctor orci eget, pretium dui. Duis fringilla vel nisi a egestas.
+        </div>
+      </div>
+      <div class="col-md-4">
+        <h3 class="row text-center title2 font1">Title 1</h3>
+        <div class="row text-justify description2">
+          Nam sapien tellus, pretium venenatis arcu nec, varius interdum tellus. Donec tristique placerat mauris, quis auctor massa pretium nec. Nullam semper vehicula vestibulum. Quisque quis neque sodales, auctor orci eget, pretium dui. Duis fringilla vel nisi a egestas.
+        </div>
+      </div>
+      <div class="col-md-4">
+        <h3 class="row text-center title2 font1">Title 1</h3>
+        <div class="row text-justify description2">
+          Nam sapien tellus, pretium venenatis arcu nec, varius interdum tellus. Donec tristique placerat mauris, quis auctor massa pretium nec. Nullam semper vehicula vestibulum. Quisque quis neque sodales, auctor orci eget, pretium dui. Duis fringilla vel nisi a egestas.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="contact-section" class="container-fluid">
+  <div class="contact-container">
+    <h2 class="row text-center title1 font1">Contact</h2>
+    <div class="container">
+      <div class="col-md-8 col-md-offset-2">
+
+        <form class="form-container">
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2">
+            <input type="text" name="name" class="form-control" placeholder="Your full name *" required="required">
+          </div>
+          <div class="col-md-8 col-md-offset-2">
+            <input type="text" name="email" class="form-control" placeholder="Your email *" required="required">
+          </div>
+          <div class="col-md-8 col-md-offset-2">
+            <textarea name="message" class="form-control" placeholder="Message *" rows="6" required="required"></textarea>
+          </div>
+        </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="footer-section" class="container-fluid">
+  <h2 class="text-center">Footer</h2>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function () {
+        $('a').on('click', function (event) {
+            if (this.hash !== '') {
+                event.preventDefault();
+                var hash = this.hash;
+                $('html, body').animate({
+                    scrollTop: $(hash).offset().top
+                }, 500, function () {
+                    window.location.hash = hash;
+                });
+            }
+        });
+    });
+</script>
 
 </body>
 

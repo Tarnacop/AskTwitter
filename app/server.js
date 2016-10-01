@@ -2,17 +2,20 @@
  * Created by aml on 01/10/2016.
  */
 
+'use strict';
+
 const express = require('express');
-const path = require('path');
+const utils = require('./utils');
 
 const app = express();
-const clientPath = path.join(__dirname, 'client');
-console.log(__dirname);
-
-app.use(express.static(clientPath));
+app.use("/css", express.static(utils.joinPathWithClient('/shared/css')));
 
 app.get('/', function (req, res) {
-    res.sendFile(path.join(clientPath, 'index.html'));
+    res.sendFile(utils.joinPathWithClient('index.html'));
+});
+
+app.get('/review-analyser', function (req, res) {
+    res.sendFile(utils.joinPathWithClient('review-analyser.html'));
 });
 
 app.listen(5000);

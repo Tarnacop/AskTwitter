@@ -1,3 +1,20 @@
-.test {
-  color: red;
+#section1 {
+  padding-top:50px;
+  height:500px;
+  color: white;
+  background-color: red;
+}
+
+#section2 {
+  padding-top:50px;
+  height:500px;
+  color: black;
+  background-color: yellow;
+}
+
+#section3 {
+  padding-top:50px;
+  height:500px;
+  color: white;
+  background-color: blue;
 }

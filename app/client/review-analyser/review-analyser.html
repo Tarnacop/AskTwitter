@@ -53,6 +53,14 @@
                 <h3> Hurray! Your results are back! </h3>
                 <h3> It seems that opinions about {{ keywordToBeShown }} on Twitter are {{ averagePolarity }}%
                     positive </h3>
+                <div ng-show="mostUsedAdjectives">
+                <h3> Some adjectives used in relation with {{ keywordToBeShown }} on Twitter are:</h3>
+                <ul>
+                    <p ng-repeat="(key, value) in mostUsedAdjectives">
+                        {{ key }}, used {{ value }} time(s)
+                    </p>
+                </ul>
+                </div>
                 <h3> Why not do another search? Try Adam Levine or Miley Cyrus for example..</h3>
             </div>
 

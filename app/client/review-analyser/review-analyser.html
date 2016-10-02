@@ -31,7 +31,7 @@
       <form class="form-container app-form">
       <div class="row">
         <div class="col-md-4 col-md-offset-3">
-          <input type="text" name="keyword" class="form-control app-form-control" placeholder="Your keyword *" required="required">
+          <input type="text" name="keyword" class="form-control app-form-control" placeholder="Your keyword *" autocomplete="off" required="required">
         </div>
         <div class="col-md-2">
           <button type="submit" name="keyword-submit" class="btn btn-default form-control app-form-control">Let's see</button>
@@ -45,6 +45,100 @@
     </div>
   </div>
 </div>
+
+<div id="result-section" class="container-fluidn">
+  <div class="result-container">
+    <h2 class="row text-center title1 font1">Result</h2>
+    <div class="row app-content text-center">
+      <div class="col-md-4 col-md-offset-1">
+        <canvas id="myChart" height="300" width="400"></canvas>
+      </div>
+      <div class="col-md-2 text-center title1 font1 backclicks">1407</div>
+      <div class="col-md-4">
+        <canvas id="my_canvas" height="300" width="400"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+
+
+  $(document).ready(function() {
+
+    $.getScript('http://www.chartjs.org/assets/Chart.js',function(){
+
+        var data = [
+            {
+                value: 300,
+                color:"#F7464A",
+                highlight: "#FF5A5E",
+                label: "Red"
+            },
+            {
+                value: 50,
+                color: "#46BFBD",
+                highlight: "#5AD3D1",
+                label: "Green"
+            },
+            {
+                value: 100,
+                color: "#FDB45C",
+                highlight: "#FFC870",
+                label: "Yellow"
+            }
+        ]
+
+        var options = {
+            animation: true
+        };
+
+        //Get the context of the canvas element we want to select
+        var c = $('#myChart');
+        var ct = c.get(0).getContext('2d');
+        var ctx = document.getElementById("myChart").getContext("2d");
+        /*********************/
+        new Chart(ctx).Pie(data,options);
+
+    })
+  });
+</script>
+
+<script type="text/javascript">
+
+var ctx = document.getElementById('my_canvas').getContext('2d');
+ctx.font = "50px Arial";
+var al = 0;
+var start = 4.72;
+var cw = ctx.canvas.width;
+var ch = ctx.canvas.height;
+var diff;
+function progressSim(){
+  diff = ((al / 100) * Math.PI*2*10).toFixed(2);
+  ctx.clearRect(0, 0, cw, ch);
+  ctx.lineWidth = 30;
+
+  var red = 255 - al * 2;
+  var green = 20 + al * 2;
+
+  ctx.fillStyle = "rgb("+ red + "," + green + ",0)";
+  ctx.strokeStyle = "rgb("+ red + "," + green + ",0)";
+
+  ctx.textAlign = 'center';
+  ctx.fillText(al+'%', cw*.5, ch*.5+15, cw);
+  ctx.beginPath();
+  ctx.arc(200, 150, 135, start, diff/10+start, false);
+  ctx.stroke();
+
+  if(al >= 100){
+    clearTimeout(sim);
+      // Add scripting here that will run when progress completes
+  }
+  al++;
+}
+var sim = setInterval(progressSim, 30);
+
+</script>
 
 </body>
 

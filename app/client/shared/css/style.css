@@ -6,7 +6,7 @@
 
 #about-section {
   padding-top: 50px;
-  height: 500px;
+  height: 550px;
   color: #002D44;
   background-color: white;
 }
@@ -32,6 +32,13 @@
   background-color: white;
 }
 
+#result-section {
+  padding-top: 50px;
+  height: 100vh;
+  color: white;
+  background-color: #002D44;
+}
+
 .font1 {
   font-family: 'Montserrat', sans-serif;
 }
@@ -51,7 +58,7 @@
 .navbar-inverse .navbar-nav > .active > a,
 .navbar-inverse .navbar-nav > .active > a:hover,
 .navbar-inverse .navbar-nav > .active > a:focus {
-  color: white !important;
+  color: #23B5FF !important;
   background-color: black !important;
 }
 
@@ -60,7 +67,7 @@
 }
 
 .app-container {
-  margin-top: 10%;
+  margin-top: 8%;
 }
 
 .home-buttons {
@@ -132,6 +139,15 @@
   margin-bottom: 10px;
 }
 
+.app-content {
+  margin-top: 100px;
+}
+
 .btn-submit {
   margin-top: 20px;
+}
+
+.backclicks {
+  padding-top: 95px;
+  font-size: 70px;
 }

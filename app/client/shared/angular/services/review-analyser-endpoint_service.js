@@ -4,23 +4,31 @@
 'use strict';
 
 angular.module('review-analyser-endpoint_service', [])
-    .factory('reviewAnalyser', ['$http', $http => {
-        const url = '';
+    .factory('analyser', ['$http', $http => {
+        const keywordAnalysisUrl = 'http://127.0.01:5000/ask_keyword/';
+        const usernameAnalysisUrl = 'http://127.0.01:5000/ask_username/?keyword=christmas';
 
-        const buildUrlWithQuery = (url, query) => {
+        const buildUrlWithQuery = (url, query, isKeyWordAnalysis) => {
 
-            return url + '?query=' + query;
+            return isKeyWordAnalysis ? url + '?keyword=' + query : url + '?username=' + query;
         };
 
-        const readAnalysis = query => {
+        const readKeywordAnalysis = query => {
 
-            $http.get(buildUrlWithQuery(url, query)).then(response => {
+            $http.get(buildUrlWithQuery(keywordAnalysisUrl, query, true)).then(response => {
+                return response.data;
+            });
+        };
+
+        const readUsernameAnalysis = query => {
+
+            $http.get(buildUrlWithQuery(usernameAnalysisUrl, query, false)).then(response => {
                 return response.data;
             });
         };
 
         return {
-            readAnalysis: readAnalysis
+            readKeywordAnalysis: readKeywordAnalysis
         };
     }]);
 

@@ -9,10 +9,11 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js"></script>
   <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body class="font2">
+<body class="font2" ng-app="review-analyser_controller" ng-controller="AnalyserController">
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <a class="navbar-brand font1" href="">Ask Twitter</a>
@@ -31,10 +32,10 @@
       <form class="form-container app-form">
       <div class="row">
         <div class="col-md-4 col-md-offset-3">
-          <input type="text" name="keyword" class="form-control app-form-control" placeholder="Your keyword *" autocomplete="off" required="required">
+          <input type="text" ng-model="keyword" name="keyword" class="form-control app-form-control" placeholder="Your keyword *" autocomplete="off" required="required">
         </div>
         <div class="col-md-2">
-          <button type="submit" name="keyword-submit" class="btn btn-default form-control app-form-control">Let's see</button>
+          <button type="submit" ng-click="performKeywordAnalysis()" name="keyword-submit" class="btn btn-default form-control app-form-control">Let's see</button>
         </div>
       </div>
       </form>
@@ -42,6 +43,9 @@
       <div class="row text-center description2">
         Nam sapien tellus, pretium venenatis arcu nec, varius interdum tellus. Donec tristique placerat mauris, quis auctor massa pretium nec. Nullam semper vehicula vestibulum. Quisque quis neque sodales, auctor orci eget, pretium dui. Duis fringilla vel nisi a egestas.
       </div>
+
+      <div>{{ keywordAnalysisResult }}</div>
+
     </div>
   </div>
 </div>
@@ -139,6 +143,9 @@ function progressSim(){
 var sim = setInterval(progressSim, 30);
 
 </script>
+
+<script src="analyser/review-analyser_controller.js"></script>
+<script src="angular-shared/services/review-analyser-endpoint_service.js"></script>
 
 </body>
 

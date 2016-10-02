@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from flask_restful import Resource, Api
 import urllib, json
 from twitterutils import TwitterUtils
@@ -8,6 +8,12 @@ app = Flask(__name__)
 api = Api(app)
 
 class AskKeyword(Resource):
+
+    @app.after_request
+    def add_cors_headers(response):
+        response.headers.add('Access-Control-Allow-Origin', 'http://localhost:5000')
+        return response
+
     def get(self):
         """Resolves the get request"""
         keyword = request.args.get('keyword')
@@ -26,7 +32,7 @@ class AskKeyword(Resource):
             dictionary_result['TotalBackLinks'] = majestic_results['DataTables']['BackLinks']['Headers']['TotalBackLinks']
             dictionaries_list.append(dictionary_result)
             count = count + 1
-            if count==500:
+            if count==50:
                 break
 
         print len(dictionaries_list) #To be delted
@@ -58,7 +64,7 @@ class AskKeyword(Resource):
                 polarity_num = polarity_num - 1
 
             count = count + 1
-            if count==200:
+            if count==25:
                 break
 
         average_polarity = polarity_sum / polarity_num
@@ -91,7 +97,7 @@ class AskKeyword(Resource):
                 break
 
         final_dictionary['Data'] = aux_dictionary
-        return final_dictionary
+        return jsonify(final_dictionary)
 
 class AskUsername(Resource):
     def get(self):

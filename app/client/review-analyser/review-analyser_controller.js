@@ -44,10 +44,19 @@ angular.module('review-analyser_controller', [])
             });
         };
 
+        const resetBeforeSearch = () => {
+
+            $scope.keywordAnalysisResult = undefined;
+            $scope.averagePolarity = undefined;
+            $scope.mostUsedAdjectives = undefined;
+        };
+
         $scope.loadingAnalysisResult = false;
 
         $scope.performKeywordAnalysis = () => {
+            $scope.keywordToBeShown = $scope.keyword;
             $scope.loadingAnalysisResult = true;
+            resetBeforeSearch();
             readKeywordAnalysis($scope.keyword);
         };
     });

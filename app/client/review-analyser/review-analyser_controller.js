@@ -6,8 +6,8 @@
 angular.module('review-analyser_controller', [])
     .controller('AnalyserController', function ($scope, $http) {
 
-        const keywordAnalysisUrl = 'http://127.0.01:5000/ask_keyword/';
-        const usernameAnalysisUrl = 'http://127.0.01:5000/ask_username/?keyword=christmas';
+        const keywordAnalysisUrl = 'http://127.0.0.1:5000/ask_keyword/';
+        const usernameAnalysisUrl = 'http://127.0.0.1:5000/ask_username/';
 
         const buildUrlWithQuery = (url, query, isKeyWordAnalysis) => {
 
@@ -16,8 +16,7 @@ angular.module('review-analyser_controller', [])
 
         const readKeywordAnalysis = query => {
 
-            let result = 'provizoriu rezultat';
-            const url = 'http://127.0.01:5000/ask_keyword/';
+            const url = 'http://127.0.0.1:5000/ask_keyword/';
 
             const config = {
                 method: 'GET',
@@ -27,14 +26,15 @@ angular.module('review-analyser_controller', [])
 
             $http(config).then(function successCallback(response) {
                 console.log('intra pe succes');
-                result = response.data;
-                console.log('rezultat: ' + result);
+                $scope.keywordAnalysisResult = response.data;
+                $scope.averagePolarity = $scope.keywordAnalysisResult['AveragePolarity'];
+                $scope.mostUsedAdjectives = $scope.keywordAnalysisResult['Data'];
+                $scope.loadingAnalysisResult = false;
             }, function errorCallback(response) {
                 console.log('intra pe error');
-                result = response;
+                $scope.keywordAnalysisResult = response.data;
+                $scope.loadingAnalysisResult = false;
             });
-
-            return result;
         };
 
         const readUsernameAnalysis = query => {
@@ -44,11 +44,10 @@ angular.module('review-analyser_controller', [])
             });
         };
 
-        $scope.keywordAnalysisResult = 'la inceput e asa raspunsu';
-        $scope.keyword = '';
+        $scope.loadingAnalysisResult = false;
 
         $scope.performKeywordAnalysis = () => {
-            console.log('vine rezultatuuuu');
-            console.log('resuuult din main: ' + readKeywordAnalysis($scope.keyword));
+            $scope.loadingAnalysisResult = true;
+            readKeywordAnalysis($scope.keyword);
         };
     });

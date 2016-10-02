@@ -1,151 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Analyser</title>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial scale=1">
-  <link href="https://fonts.googleapis.com/css?family=Patua+One|Montserrat:700" rel="stylesheet">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js"></script>
-  <link rel="stylesheet" href="css/style.css">
+    <title>Analyser</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Patua+One|Montserrat:700" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js"></script>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body class="font2" ng-app="review-analyser_controller" ng-controller="AnalyserController">
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
-  <a class="navbar-brand font1" href="">Ask Twitter</a>
-  <ul class="nav navbar-nav navbar-right">
-    <li><a href="">Home</a></li>
-    <li><a href="">About</a></li>
-    <li><a href="">Contact</a></li>
-  </ul>
+    <a class="navbar-brand font1" href="">Ask Twitter</a>
+    <ul class="nav navbar-nav navbar-right">
+        <li><a href="">Home</a></li>
+        <li><a href="">About</a></li>
+        <li><a href="">Contact</a></li>
+    </ul>
 </nav>
 
 <div id="app-section" class="container-fluid">
-  <div class="app-container">
-    <div class="container">
-      <h1 class="row text-center app-banner font 1">What does Twitter think about...?</h1>
+    <div class="app-container">
+        <div class="container">
+            <h1 class="row text-center app-banner font 1">What does Twitter think about...?</h1>
 
-      <form class="form-container app-form">
-      <div class="row">
-        <div class="col-md-4 col-md-offset-3">
-          <input type="text" ng-model="keyword" name="keyword" class="form-control app-form-control" placeholder="Your keyword *" autocomplete="off" required="required">
+            <div class="row text-center description2">
+                Nam sapien tellus, pretium venenatis arcu nec, varius interdum tellus. Donec tristique placerat mauris,
+                quis auctor massa pretium nec. Nullam semper vehicula vestibulum. Quisque quis neque sodales, auctor
+                orci eget, pretium dui. Duis fringilla vel nisi a egestas.
+            </div>
+
+            <form class="form-container app-form">
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-3">
+                        <input type="text" ng-model="keyword" name="keyword" class="form-control app-form-control"
+                               placeholder="Your keyword *" autocomplete="off" required="required">
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" ng-click="performKeywordAnalysis()" name="keyword-submit"
+                                class="btn btn-default form-control app-form-control">Let's see
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="text-center" ng-show="averagePolarity">
+                <h3> Hurray! Your results are back! </h3>
+                <h3> It seems that opinions about {{ keyword }} on Twitter are {{ averagePolarity }}%
+                    positive </h3>
+            </div>
+
+            <div class="text-center" ng-show="loadingAnalysisResult">
+                <h3>Loading results... This could take some time :( but here's a funny one for you....</h3>
+                <h3>-What is the difference between a snowman and a snowwoman?</h3>
+                <h3>-Snowballs.</h3>
+
+            </div>
+
         </div>
-        <div class="col-md-2">
-          <button type="submit" ng-click="performKeywordAnalysis()" name="keyword-submit" class="btn btn-default form-control app-form-control">Let's see</button>
-        </div>
-      </div>
-      </form>
-
-      <div class="row text-center description2">
-        Nam sapien tellus, pretium venenatis arcu nec, varius interdum tellus. Donec tristique placerat mauris, quis auctor massa pretium nec. Nullam semper vehicula vestibulum. Quisque quis neque sodales, auctor orci eget, pretium dui. Duis fringilla vel nisi a egestas.
-      </div>
-
-      <div>{{ keywordAnalysisResult }}</div>
-
     </div>
-  </div>
 </div>
-
-<div id="result-section" class="container-fluidn">
-  <div class="result-container">
-    <h2 class="row text-center title1 font1">Result</h2>
-    <div class="row app-content text-center">
-      <div class="col-md-4 col-md-offset-1">
-        <canvas id="myChart" height="300" width="400"></canvas>
-      </div>
-      <div class="col-md-2 text-center title1 font1 backclicks">1407</div>
-      <div class="col-md-4">
-        <canvas id="my_canvas" height="300" width="400"></canvas>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script type="text/javascript">
-
-
-  $(document).ready(function() {
-
-    $.getScript('http://www.chartjs.org/assets/Chart.js',function(){
-
-        var data = [
-            {
-                value: 300,
-                color:"#F7464A",
-                highlight: "#FF5A5E",
-                label: "Red"
-            },
-            {
-                value: 50,
-                color: "#46BFBD",
-                highlight: "#5AD3D1",
-                label: "Green"
-            },
-            {
-                value: 100,
-                color: "#FDB45C",
-                highlight: "#FFC870",
-                label: "Yellow"
-            }
-        ]
-
-        var options = {
-            animation: true
-        };
-
-        //Get the context of the canvas element we want to select
-        var c = $('#myChart');
-        var ct = c.get(0).getContext('2d');
-        var ctx = document.getElementById("myChart").getContext("2d");
-        /*********************/
-        new Chart(ctx).Pie(data,options);
-
-    })
-  });
-</script>
-
-<script type="text/javascript">
-
-var ctx = document.getElementById('my_canvas').getContext('2d');
-ctx.font = "50px Arial";
-var al = 0;
-var start = 4.72;
-var cw = ctx.canvas.width;
-var ch = ctx.canvas.height;
-var diff;
-function progressSim(){
-  diff = ((al / 100) * Math.PI*2*10).toFixed(2);
-  ctx.clearRect(0, 0, cw, ch);
-  ctx.lineWidth = 30;
-
-  var red = 255 - al * 2;
-  var green = 20 + al * 2;
-
-  ctx.fillStyle = "rgb("+ red + "," + green + ",0)";
-  ctx.strokeStyle = "rgb("+ red + "," + green + ",0)";
-
-  ctx.textAlign = 'center';
-  ctx.fillText(al+'%', cw*.5, ch*.5+15, cw);
-  ctx.beginPath();
-  ctx.arc(200, 150, 135, start, diff/10+start, false);
-  ctx.stroke();
-
-  if(al >= 100){
-    clearTimeout(sim);
-      // Add scripting here that will run when progress completes
-  }
-  al++;
-}
-var sim = setInterval(progressSim, 30);
-
-</script>
 
 <script src="analyser/review-analyser_controller.js"></script>
-<script src="angular-shared/services/review-analyser-endpoint_service.js"></script>
 
 </body>
 

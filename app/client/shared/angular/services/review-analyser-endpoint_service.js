@@ -6,6 +6,7 @@
 angular.module('angular-shared/services/review-analyser-endpoint_service', [])
     .factory('analyserService', ($http, $q) => {
 
+        // TODO Remove hard-coded urls
         const keywordAnalysisUrl = 'http://127.0.0.1:5000/ask_keyword/';
         const usernameAnalysisUrl = 'http://127.0.0.1:5000/ask_username/';
 

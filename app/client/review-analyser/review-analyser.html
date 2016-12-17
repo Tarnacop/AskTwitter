@@ -64,6 +64,12 @@
                 <h3> Why not do another search? Try Adam Levine or Miley Cyrus for example..</h3>
             </div>
 
+            <div class="text-center" ng-show="keywordAnalysisNotAvailable">
+                <h3> There was a problem retrieving the results. This is most probably because our Hackathon API key
+                     for Majestic has expired...
+                </h3>
+            </div>
+
             <div class="text-center" ng-show="loadingAnalysisResult">
                 <h3>Loading results... This could take some time :( but here's a funny one for you....</h3>
                 <h3>-What is the difference between a snowman and a snowwoman?</h3>
@@ -76,6 +82,7 @@
 </div>
 
 <script src="analyser/review-analyser_controller.js"></script>
+<script src="angular-shared/services/review-analyser-endpoint_service.js"></script>
 
 </body>
 

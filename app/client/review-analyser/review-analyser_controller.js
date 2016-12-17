@@ -3,53 +3,35 @@
  */
 'use strict';
 
-angular.module('review-analyser_controller', [])
-    .controller('AnalyserController', function ($scope, $http) {
-
-        const keywordAnalysisUrl = 'http://127.0.0.1:5000/ask_keyword/';
-        const usernameAnalysisUrl = 'http://127.0.0.1:5000/ask_username/';
-
-        const buildUrlWithQuery = (url, query, isKeyWordAnalysis) => {
-
-            return isKeyWordAnalysis ? url + '?keyword=' + query : url + '?username=' + query;
-        };
+angular.module('review-analyser_controller', ['angular-shared/services/review-analyser-endpoint_service'])
+    .controller('AnalyserController', function ($scope, analyserService) {
 
         const readKeywordAnalysis = query => {
 
-            const url = 'http://127.0.0.1:5000/ask_keyword/';
+            analyserService.readAnalysis(query, true).then(result => {
 
-            const config = {
-                method: 'GET',
-                url: url,
-                params: {keyword: query}
-            };
-
-            $http(config).then(function successCallback(response) {
-                console.log('intra pe succes');
-                $scope.keywordAnalysisResult = response.data;
+                $scope.keywordAnalysisResult = result;
                 $scope.averagePolarity = $scope.keywordAnalysisResult['AveragePolarity'];
                 $scope.mostUsedAdjectives = $scope.keywordAnalysisResult['Data'];
                 $scope.loadingAnalysisResult = false;
-            }, function errorCallback(response) {
-                console.log('intra pe error');
-                $scope.keywordAnalysisResult = response.data;
+            }, () => {
+
+                $scope.keywordAnalysisNotAvailable = true;
                 $scope.loadingAnalysisResult = false;
             });
         };
 
-        const readUsernameAnalysis = query => {
-
-            $http.get(buildUrlWithQuery(usernameAnalysisUrl, query, false)).then(response => {
-                return response.data;
-            });
-        };
+        // TODO: Read username analysis
 
         const resetBeforeSearch = () => {
 
             $scope.keywordAnalysisResult = undefined;
+            $scope.keywordAnalysisNotAvailable = undefined;
             $scope.averagePolarity = undefined;
             $scope.mostUsedAdjectives = undefined;
         };
+
+        // ################################################################################ //
 
         $scope.loadingAnalysisResult = false;
 

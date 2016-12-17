@@ -3,32 +3,41 @@
  */
 'use strict';
 
-angular.module('review-analyser-endpoint_service', [])
-    .factory('analyser', ['$http', $http => {
-        const keywordAnalysisUrl = 'http://127.0.01:5000/ask_keyword/';
-        const usernameAnalysisUrl = 'http://127.0.01:5000/ask_username/?keyword=christmas';
+angular.module('angular-shared/services/review-analyser-endpoint_service', [])
+    .factory('analyserService', ($http, $q) => {
 
-        const buildUrlWithQuery = (url, query, isKeyWordAnalysis) => {
+        const keywordAnalysisUrl = 'http://127.0.0.1:5000/ask_keyword/';
+        const usernameAnalysisUrl = 'http://127.0.0.1:5000/ask_username/';
 
-            return isKeyWordAnalysis ? url + '?keyword=' + query : url + '?username=' + query;
+        const config = (query, isKeywordAnalysis) => {
+
+            return {
+                method: 'GET',
+                url: isKeywordAnalysis ? keywordAnalysisUrl : usernameAnalysisUrl,
+                params: isKeywordAnalysis ? {keyword: query} : {username: query}
+            };
         };
 
-        const readKeywordAnalysis = query => {
+        const read = (query, isKeywordAnalysis) => {
 
-            $http.get(buildUrlWithQuery(keywordAnalysisUrl, query, true)).then(response => {
-                return response.data;
-            });
-        };
+            const deferred = $q.defer();
 
-        const readUsernameAnalysis = query => {
+            $http(config(query, isKeywordAnalysis)).then(
+                successResponse => {
 
-            $http.get(buildUrlWithQuery(usernameAnalysisUrl, query, false)).then(response => {
-                return response.data;
-            });
+                    deferred.resolve(successResponse.data);
+                },
+                errorResponse => {
+
+                    deferred.reject();
+                }
+            );
+
+            return deferred.promise;
         };
 
         return {
-            readKeywordAnalysis: readKeywordAnalysis
+            readAnalysis: read
         };
-    }]);
+    });
 
